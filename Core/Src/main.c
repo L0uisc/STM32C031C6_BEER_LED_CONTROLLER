@@ -92,19 +92,12 @@ int main(void)
 
   /* USER CODE END 2 */
 
-  /* Initialize leds */
-  BSP_LED_Init(LED_GREEN);
-
-  /* Initialize USER push-button, will be used to trigger an interrupt each time it's pressed.*/
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
-
   /* Initialize COM1 port (115200, 8 bits (7-bit data + 1 stop bit), no parity */
   BspCOMInit.BaudRate   = 115200;
   BspCOMInit.WordLength = COM_WORDLENGTH_8B;
   BspCOMInit.StopBits   = COM_STOPBITS_1;
   BspCOMInit.Parity     = COM_PARITY_NONE;
   BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
-
   if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
   {
     Error_Handler();
@@ -185,65 +178,55 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GROUP7_G_GPIO_Port, GROUP7_G_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GROUP6_R_Pin|GROUP6_G_Pin|GROUP6_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GROUP2_G_Pin|GROUP2_B_Pin|GROUP3_R_Pin|GROUP5_R_Pin
-                          |GROUP5_G_Pin|GROUP8_R_Pin|GROUP7_R_Pin|GROUP10_B_Pin
+  HAL_GPIO_WritePin(GPIOA, GROUP2_G_Pin|GROUP2_B_Pin|GROUP2_R_Pin|GROUP5_B_Pin
+                          |GROUP5_R_Pin|GROUP5_G_Pin|GROUP7_R_Pin|GROUP7_G_Pin
                           |GROUP7_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GROUP6_R_Pin|GROUP3_G_Pin|GROUP6_G_Pin|GROUP10_R_Pin
-                          |GROUP3_B_Pin|GROUP5_B_Pin|GROUP9_B_Pin|GROUP9_G_Pin
-                          |GROUP8_G_Pin|GROUP10_G_Pin|GROUP9_R_Pin|GROUP8_B_Pin
-                          |GROUP4_G_Pin|GROUP4_B_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GROUP8_R_Pin|GROUP3_G_Pin|GROUP10_R_Pin|GROUP3_B_Pin
+                          |GROUP10_B_Pin|GROUP9_B_Pin|GROUP9_G_Pin|GROUP8_G_Pin
+                          |GROUP10_G_Pin|GROUP9_R_Pin|GROUP8_B_Pin|GROUP3_R_Pin
+                          |GROUP4_R_Pin|GROUP4_G_Pin|GROUP4_B_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GROUP2_R_Pin|GROUP6_B_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, GROUP1_R_Pin|GROUP1_G_Pin|GROUP1_B_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, GROUP1_R_Pin|GROUP1_G_Pin|GROUP1_B_Pin|GROUP4_R_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : GROUP7_G_Pin */
-  GPIO_InitStruct.Pin = GROUP7_G_Pin;
+  /*Configure GPIO pins : GROUP6_R_Pin GROUP6_G_Pin GROUP6_B_Pin */
+  GPIO_InitStruct.Pin = GROUP6_R_Pin|GROUP6_G_Pin|GROUP6_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GROUP7_G_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : GROUP2_G_Pin GROUP2_B_Pin GROUP3_R_Pin GROUP5_R_Pin
-                           GROUP5_G_Pin GROUP8_R_Pin GROUP7_R_Pin GROUP10_B_Pin
+  /*Configure GPIO pins : GROUP2_G_Pin GROUP2_B_Pin GROUP2_R_Pin GROUP5_B_Pin
+                           GROUP5_R_Pin GROUP5_G_Pin GROUP7_R_Pin GROUP7_G_Pin
                            GROUP7_B_Pin */
-  GPIO_InitStruct.Pin = GROUP2_G_Pin|GROUP2_B_Pin|GROUP3_R_Pin|GROUP5_R_Pin
-                          |GROUP5_G_Pin|GROUP8_R_Pin|GROUP7_R_Pin|GROUP10_B_Pin
+  GPIO_InitStruct.Pin = GROUP2_G_Pin|GROUP2_B_Pin|GROUP2_R_Pin|GROUP5_B_Pin
+                          |GROUP5_R_Pin|GROUP5_G_Pin|GROUP7_R_Pin|GROUP7_G_Pin
                           |GROUP7_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : GROUP6_R_Pin GROUP3_G_Pin GROUP6_G_Pin GROUP10_R_Pin
-                           GROUP3_B_Pin GROUP5_B_Pin GROUP9_B_Pin GROUP9_G_Pin
-                           GROUP8_G_Pin GROUP10_G_Pin GROUP9_R_Pin GROUP8_B_Pin
-                           GROUP4_G_Pin GROUP4_B_Pin */
-  GPIO_InitStruct.Pin = GROUP6_R_Pin|GROUP3_G_Pin|GROUP6_G_Pin|GROUP10_R_Pin
-                          |GROUP3_B_Pin|GROUP5_B_Pin|GROUP9_B_Pin|GROUP9_G_Pin
-                          |GROUP8_G_Pin|GROUP10_G_Pin|GROUP9_R_Pin|GROUP8_B_Pin
-                          |GROUP4_G_Pin|GROUP4_B_Pin;
+  /*Configure GPIO pins : GROUP8_R_Pin GROUP3_G_Pin GROUP10_R_Pin GROUP3_B_Pin
+                           GROUP10_B_Pin GROUP9_B_Pin GROUP9_G_Pin GROUP8_G_Pin
+                           GROUP10_G_Pin GROUP9_R_Pin GROUP8_B_Pin GROUP3_R_Pin
+                           GROUP4_R_Pin GROUP4_G_Pin GROUP4_B_Pin */
+  GPIO_InitStruct.Pin = GROUP8_R_Pin|GROUP3_G_Pin|GROUP10_R_Pin|GROUP3_B_Pin
+                          |GROUP10_B_Pin|GROUP9_B_Pin|GROUP9_G_Pin|GROUP8_G_Pin
+                          |GROUP10_G_Pin|GROUP9_R_Pin|GROUP8_B_Pin|GROUP3_R_Pin
+                          |GROUP4_R_Pin|GROUP4_G_Pin|GROUP4_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : GROUP2_R_Pin GROUP6_B_Pin */
-  GPIO_InitStruct.Pin = GROUP2_R_Pin|GROUP6_B_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : GROUP1_R_Pin GROUP1_G_Pin GROUP1_B_Pin GROUP4_R_Pin */
-  GPIO_InitStruct.Pin = GROUP1_R_Pin|GROUP1_G_Pin|GROUP1_B_Pin|GROUP4_R_Pin;
+  /*Configure GPIO pins : GROUP1_R_Pin GROUP1_G_Pin GROUP1_B_Pin */
+  GPIO_InitStruct.Pin = GROUP1_R_Pin|GROUP1_G_Pin|GROUP1_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
