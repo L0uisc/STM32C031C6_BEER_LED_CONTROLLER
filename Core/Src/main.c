@@ -104,6 +104,7 @@ int main(void)
   BspCOMInit.StopBits   = COM_STOPBITS_1;
   BspCOMInit.Parity     = COM_PARITY_NONE;
   BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
+
   if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
   {
     Error_Handler();
@@ -111,9 +112,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  BSP_COM_SelectLogPort(COM1);
+  printf("hello, world!\r\n");
   while (1)
   {
-
+	HAL_GPIO_WriteMultipleStatePin(GROUP1_R_GPIO_Port, GROUP1_B_Pin | GROUP1_G_Pin, GROUP1_R_Pin);
+	HAL_Delay(500);
+	HAL_GPIO_WriteMultipleStatePin(GROUP1_R_GPIO_Port, GROUP1_B_Pin | GROUP1_R_Pin, GROUP1_G_Pin);
+	HAL_Delay(500);
+	HAL_GPIO_WriteMultipleStatePin(GROUP1_R_GPIO_Port, GROUP1_R_Pin | GROUP1_G_Pin, GROUP1_B_Pin);
+	HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
