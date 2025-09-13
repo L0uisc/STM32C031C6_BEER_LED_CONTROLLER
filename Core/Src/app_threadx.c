@@ -61,7 +61,8 @@ typedef struct
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define NUM_LED_GROUPS 5
+#define NUM_LED_GROUPS 10
+#define LED_THREAD_STACK_SIZE TX_MINIMUM_STACK
 #define LED_THREAD_PRIORITY (TX_MAX_PRIORITIES >> 1)
 #define TICKS_PER_TIME_UNIT 25
 /* USER CODE END PD */
@@ -90,17 +91,60 @@ const led_phase_t group_2_sequence[] = {
 };
 const led_phase_t group_3_sequence[] = {
 		{ .duration = 4, .colour = RGB_LED_WHITE },
-		{ .duration = 24, .colour = RGB_LED_OFF }
+		{ .duration = 28, .colour = RGB_LED_OFF }
 };
 const led_phase_t group_4_sequence[] = {
 		{ .duration = 4, .colour = RGB_LED_OFF },
 		{ .duration = 4, .colour = RGB_LED_WHITE },
-		{ .duration = 20, .colour = RGB_LED_OFF }
+		{ .duration = 24, .colour = RGB_LED_OFF }
 };
 const led_phase_t group_5_sequence[] = {
 		{ .duration = 8, .colour = RGB_LED_OFF },
 		{ .duration = 4, .colour = RGB_LED_WHITE },
-		{ .duration = 16, .colour = RGB_LED_OFF }
+		{ .duration = 20, .colour = RGB_LED_OFF }
+};
+const led_phase_t group_6_sequence[] = {
+		{ .duration = 12, .colour = RGB_LED_WHITE },
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_BLUE },
+		{ .duration = 4, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_7_sequence[] = {
+		{ .duration = 12, .colour = RGB_LED_BLUE },
+		{ .duration = 5, .colour = RGB_LED_OFF },
+		{ .duration = 3, .colour = RGB_LED_BLUE },
+		{ .duration = 1, .colour = RGB_LED_OFF },
+		{ .duration = 5, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE }
+};
+const led_phase_t group_8_sequence[] = {
+		{ .duration = 12, .colour = RGB_LED_WHITE },
+		{ .duration = 6, .colour = RGB_LED_OFF },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_OFF },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_9_sequence[] = {
+		{ .duration = 12, .colour = RGB_LED_BLUE },
+		{ .duration = 7, .colour = RGB_LED_OFF },
+		{ .duration = 1, .colour = RGB_LED_BLUE },
+		{ .duration = 3, .colour = RGB_LED_OFF },
+		{ .duration = 3, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE }
+};
+const led_phase_t group_10_sequence[] = {
+		{ .duration = 1, .colour = RGB_LED_GREEN }
 };
 
 led_cycle_t led_cycle[NUM_LED_GROUPS] = {
@@ -108,7 +152,12 @@ led_cycle_t led_cycle[NUM_LED_GROUPS] = {
 		CYCLE_DEFINITION(group_2_sequence),
 		CYCLE_DEFINITION(group_3_sequence),
 		CYCLE_DEFINITION(group_4_sequence),
-		CYCLE_DEFINITION(group_5_sequence)
+		CYCLE_DEFINITION(group_5_sequence),
+		CYCLE_DEFINITION(group_6_sequence),
+		CYCLE_DEFINITION(group_7_sequence),
+		CYCLE_DEFINITION(group_8_sequence),
+		CYCLE_DEFINITION(group_9_sequence),
+		CYCLE_DEFINITION(group_10_sequence)
 };
 /* USER CODE END PV */
 
@@ -146,24 +195,24 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   for (int i = 0; i < NUM_LED_GROUPS; ++i)
   {
     void *buffer;
-    if ((ret = tx_byte_allocate(byte_pool, &buffer, 300, TX_NO_WAIT)) != TX_SUCCESS)
+    if ((ret = tx_byte_allocate(byte_pool, &buffer, LED_THREAD_STACK_SIZE, TX_NO_WAIT)) != TX_SUCCESS)
     {
+      printf("Allocation error: %08X", ret);
       goto err;
     }
 
-    char name[9];
-    sprintf(name, "Group %d", i + 1);
     if ((ret = tx_thread_create(&led_group_threads[i],
-    		name,
+    		"LED group control thread",
 			App_Led_Group_Function,
 			i,
 			buffer,
-			300,
+			LED_THREAD_STACK_SIZE,
 			LED_THREAD_PRIORITY,
 			LED_THREAD_PRIORITY,
 			TX_NO_TIME_SLICE,
 			TX_AUTO_START)) != TX_SUCCESS)
     {
+      printf("Thread create error: %08X", ret);
       goto err;
     }
   }
@@ -172,7 +221,11 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
 
   for (int i = 0; i < NUM_LED_GROUPS; ++i)
   {
-    tx_semaphore_ceiling_put(&tx_app_semaphore, NUM_LED_GROUPS);
+    if ((ret = tx_semaphore_ceiling_put(&tx_app_semaphore, NUM_LED_GROUPS)) != TX_SUCCESS)
+    {
+      printf("Semaphore put error: %08X", ret);
+      goto err;
+    }
   }
 
 err:
@@ -236,6 +289,16 @@ static inline const led_phase_t *const App_Led_Group_Sequence_Select(int index)
   	return group_4_sequence;
   case 5:
   	return group_5_sequence;
+  case 6:
+  	return group_6_sequence;
+  case 7:
+  	return group_7_sequence;
+  case 8:
+  	return group_8_sequence;
+  case 9:
+  	return group_9_sequence;
+  case 10:
+  	return group_10_sequence;
   default:
   	return NULL;
   }
@@ -256,15 +319,15 @@ static inline GPIO_TypeDef *App_Led_Group_Get_GPIO_Port(int index)
   case 5:
     return GROUP5_R_GPIO_Port;
   case 6:
-    return GROUP5_R_GPIO_Port;
+    return GROUP6_R_GPIO_Port;
   case 7:
-    return GROUP5_R_GPIO_Port;
+    return GROUP7_R_GPIO_Port;
   case 8:
-    return GROUP5_R_GPIO_Port;
+    return GROUP8_R_GPIO_Port;
   case 9:
-    return GROUP5_R_GPIO_Port;
+    return GROUP9_R_GPIO_Port;
   case 10:
-    return GROUP5_R_GPIO_Port;
+    return GROUP10_R_GPIO_Port;
   default:
     return NULL;
   }
