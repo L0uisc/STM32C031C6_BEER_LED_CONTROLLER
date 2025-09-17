@@ -83,6 +83,129 @@ TX_SEMAPHORE tx_app_semaphore;
 /* USER CODE BEGIN PV */
 TX_THREAD led_group_threads[NUM_LED_GROUPS];
 
+#ifdef TEST_SEQUENCE_1
+const led_phase_t group_1_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_2_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_3_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_4_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_5_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_6_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_7_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_8_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_9_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+const led_phase_t group_10_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_RED },
+		{ .duration = 4, .colour = RGB_LED_YELLOW },
+		{ .duration = 4, .colour = RGB_LED_GREEN},
+		{ .duration = 4, .colour = RGB_LED_CYAN },
+		{ .duration = 4, .colour = RGB_LED_BLUE},
+		{ .duration = 4, .colour = RGB_LED_MAGENTA }
+};
+#elif defined(TEST_SEQUENCE_2)
+const led_phase_t group_1_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_2_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_3_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_4_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_5_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_6_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_7_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_8_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_9_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+const led_phase_t group_10_sequence[] = {
+		{ .duration = 4, .colour = RGB_LED_OFF },
+		{ .duration = 4, .colour = RGB_LED_WHITE }
+};
+#else
 const led_phase_t group_1_sequence[] = {
 		{ .duration = 1, .colour = RGB_LED_YELLOW }
 };
@@ -146,6 +269,7 @@ const led_phase_t group_9_sequence[] = {
 const led_phase_t group_10_sequence[] = {
 		{ .duration = 1, .colour = RGB_LED_GREEN }
 };
+#endif // TEST_SEQUENCE_1
 
 led_cycle_t led_cycle[NUM_LED_GROUPS] = {
 		CYCLE_DEFINITION(group_1_sequence),
