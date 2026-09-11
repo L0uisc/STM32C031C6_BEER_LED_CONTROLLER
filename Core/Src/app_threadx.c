@@ -207,67 +207,53 @@ const led_phase_t group_10_sequence[] = {
 };
 #else
 const led_phase_t group_1_sequence[] = {
-		{ .duration = 1, .colour = RGB_LED_YELLOW }
+		{ .duration = 8, .colour = RGB_LED_MAGENTA },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 6, .colour = RGB_LED_MAGENTA }
 };
 const led_phase_t group_2_sequence[] = {
-		{ .duration = 1, .colour = RGB_LED_WHITE }
+		{ .duration = 8, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_MAGENTA },
+		{ .duration = 6, .colour = RGB_LED_BLUE }
 };
 const led_phase_t group_3_sequence[] = {
-		{ .duration = 4, .colour = RGB_LED_WHITE },
-		{ .duration = 28, .colour = RGB_LED_OFF }
+		{ .duration = 12, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 2, .colour = RGB_LED_WHITE }
 };
 const led_phase_t group_4_sequence[] = {
-		{ .duration = 4, .colour = RGB_LED_OFF },
-		{ .duration = 4, .colour = RGB_LED_WHITE },
-		{ .duration = 24, .colour = RGB_LED_OFF }
+		{ .duration = 10, .colour = RGB_LED_YELLOW },
+		{ .duration = 2, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_YELLOW },
+		{ .duration = 2, .colour = RGB_LED_WHITE }
 };
 const led_phase_t group_5_sequence[] = {
-		{ .duration = 8, .colour = RGB_LED_OFF },
-		{ .duration = 4, .colour = RGB_LED_WHITE },
-		{ .duration = 20, .colour = RGB_LED_OFF }
+		{ .duration = 2, .colour = RGB_LED_OFF },
+		{ .duration = 2, .colour = RGB_LED_YELLOW },
+		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 10, .colour = RGB_LED_CYAN }
 };
 const led_phase_t group_6_sequence[] = {
-		{ .duration = 12, .colour = RGB_LED_WHITE },
-		{ .duration = 4, .colour = RGB_LED_OFF },
-		{ .duration = 4, .colour = RGB_LED_BLUE },
-		{ .duration = 4, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_YELLOW },
 		{ .duration = 2, .colour = RGB_LED_BLUE },
-		{ .duration = 2, .colour = RGB_LED_WHITE },
-		{ .duration = 2, .colour = RGB_LED_BLUE },
-		{ .duration = 2, .colour = RGB_LED_WHITE }
+		{ .duration = 2, .colour = RGB_LED_CYAN },
+		{ .duration = 10, .colour = RGB_LED_WHITE }
 };
 const led_phase_t group_7_sequence[] = {
-		{ .duration = 12, .colour = RGB_LED_BLUE },
-		{ .duration = 5, .colour = RGB_LED_OFF },
-		{ .duration = 3, .colour = RGB_LED_BLUE },
-		{ .duration = 1, .colour = RGB_LED_OFF },
-		{ .duration = 5, .colour = RGB_LED_WHITE },
-		{ .duration = 2, .colour = RGB_LED_BLUE },
+		{ .duration = 8, .colour = RGB_LED_CYAN },
 		{ .duration = 2, .colour = RGB_LED_WHITE },
-		{ .duration = 2, .colour = RGB_LED_BLUE }
+		{ .duration = 2, .colour = RGB_LED_CYAN },
+		{ .duration = 2, .colour = RGB_LED_WHITE },
+		{ .duration = 2, .colour = RGB_LED_CYAN }
 };
 const led_phase_t group_8_sequence[] = {
-		{ .duration = 12, .colour = RGB_LED_WHITE },
-		{ .duration = 6, .colour = RGB_LED_OFF },
-		{ .duration = 2, .colour = RGB_LED_BLUE },
-		{ .duration = 2, .colour = RGB_LED_OFF },
-		{ .duration = 2, .colour = RGB_LED_BLUE },
-		{ .duration = 2, .colour = RGB_LED_WHITE },
-		{ .duration = 2, .colour = RGB_LED_BLUE },
-		{ .duration = 2, .colour = RGB_LED_WHITE }
+		{ .duration = 16, .colour = RGB_LED_MAGENTA }
 };
 const led_phase_t group_9_sequence[] = {
-		{ .duration = 12, .colour = RGB_LED_BLUE },
-		{ .duration = 7, .colour = RGB_LED_OFF },
-		{ .duration = 1, .colour = RGB_LED_BLUE },
-		{ .duration = 3, .colour = RGB_LED_OFF },
-		{ .duration = 3, .colour = RGB_LED_WHITE },
-		{ .duration = 2, .colour = RGB_LED_BLUE },
-		{ .duration = 2, .colour = RGB_LED_WHITE },
-		{ .duration = 2, .colour = RGB_LED_BLUE }
+		{ .duration = 16, .colour = RGB_LED_WHITE }
 };
 const led_phase_t group_10_sequence[] = {
-		{ .duration = 1, .colour = RGB_LED_GREEN }
+		{ .duration = 16, .colour = RGB_LED_BLUE }
 };
 #endif // TEST_SEQUENCE_1
 

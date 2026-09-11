@@ -258,6 +258,7 @@ __tx_ts_wait:
     CPSID   i                                       @ Disable interrupts
     LDR     r1, [r2]                                @ Pickup the next thread to execute pointer
     STR     r1, [r0]                                @ Store it in the current pointer
+
     CMP     r1, #0                                  @ If non-NULL, a new thread is ready!
     BNE     __tx_ts_ready                           @
 
